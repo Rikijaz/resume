@@ -22,16 +22,18 @@
     </script>
     <script>
         /**
-        * Function that captures a click on an outbound link in Analytics.
+        * Function that registers a click on an outbound link in Analytics.
         * This function takes a valid URL string as an argument, and uses that URL string
         * as the event label. Setting the transport method to 'beacon' lets the hit be sent
         * using 'navigator.sendBeacon' in browser that support it.
         */
-        var captureOutboundLink = function(url) {
-           ga('send', 'event', 'outbound', 'click', url, {
-             'transport': 'beacon',
-             'hitCallback': function(){document.location = url;}
-           });
+        var getOutboundLink = function(url) {
+          gtag('event', 'click', {
+            'event_category': 'outbound',
+            'event_label': url,
+            'transport_type': 'beacon',
+            'event_callback': function(){document.location = url;}
+          });
         }
     </script>
 
@@ -190,7 +192,9 @@
                             invite friends to your events, and join other events!
                         </p>
                         <a target="_blank" rel="noopener noreferrer" href="https://rikijaz.github.io/Doodle-Scheduling/#/">Try it out!</a> <br/> 
-                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/Rikijaz/Doodle-Scheduling" onclick="captureOutboundLink('https://github.com/Rikijaz/Doodle-Scheduling'); return false;">View Project</a>
+                        <a href="https://github.com/Rikijaz/Doodle-Scheduling" onclick="getOutboundLink('https://github.com/Rikijaz/Doodle-Scheduling'); return false;">View Project</a>
+                        <!-- <a href="http://www.example.com" onclick="gtag('event', 'Click', { 'event_category': 'Outbound Link', 'event_action':'Click','event_label':'Live365BroadcastLaunch-ListenLive' });"><img src="https://live365.com/assets/listen-now-live365logo.png"/></a> -->
+                        
                     </div>
                     <!-- End .project-info -->
                 </div>
